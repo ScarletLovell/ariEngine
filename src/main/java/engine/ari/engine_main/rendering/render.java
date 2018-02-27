@@ -107,13 +107,14 @@ public class render extends Engine {
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         //camera.camController.update();
-
-        modelBatch.begin(Character.camera);
-        modelBatch.render(instances, Environment.get());
-        modelBatch.render(Models.modelInstances, Environment.get());
-        if(Models.characterInstance != null)
-            modelBatch.render(Models.characterInstance, Environment.get());
-        modelBatch.end();
+        if(Character.camera != null) {
+            modelBatch.begin(Character.camera.camera);
+            modelBatch.render(instances, Environment.get());
+            modelBatch.render(Models.modelInstances, Environment.get());
+            if (Models.characterInstance != null)
+                modelBatch.render(Models.characterInstance, Environment.get());
+            modelBatch.end();
+        }
 
         spriteBatch.begin();
         //spotlight.draw(spriteBatch, 0.5f);

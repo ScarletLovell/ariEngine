@@ -1,16 +1,27 @@
 
-// --- functions --- //
-declare function Runnable(Function): void;
+// --- imports --- //
+/// <reference path='./ts/math.ts'/>
+import Matrix4 = math.Matrix4;
+import Vector3 = math.Vector3;
 
-// All Classes
+// --- much needed functions --- //
+interface Runnable {
+    // i have been working on trying to get this to work in TypeScript forever
+    // i have finally done it :D
+    new(Function: Function): Runnable;
+} declare var Runnable: Runnable;
+
+// --- much needed classes --- //
 interface jV {
     equals(Object): boolean;
     tostring(): string;
 }
 
+// --- any other class --- //
+
 interface En {
-    setTitle(string: "Title"): void;
-    setWindow(Width: "number", Height: "number"): void;
+    setTitle(title: string): void;
+    setWindow(width: number, height: number): void;
 }
 
 interface Window {
@@ -36,22 +47,22 @@ interface Console {
 } declare var Console: Console;
 
 interface Timer {
-    start(Delay: number, Ticks: number, Function): Timer;
+    start(Delay: number, Ticks: number, runnable: Runnable): Timer;
     end(): void;
 } declare var Timer: Timer;
 
 interface inputClass {
     runnable; pressed; key;
-    setInput(Runnable): inputClass;
+    setInput(runnable: Runnable): inputClass;
     setPressType(Boolean): inputClass;
     remove();
 }
 interface Input {
-    onKeyPressed(Key: string, Runnable): inputClass;
-    onKeyJustPressed(Key: string, Runnable): inputClass;
-    onKeyReleased(Key: string, Runnable): inputClass;
-    onMouseWheelUp(Runnable): void;
-    onMouseWheelDown(Runnable): void;
+    onKeyPressed(Key: string, runnable: Runnable): inputClass;
+    onKeyJustPressed(Key: string, runnable: Runnable): inputClass;
+    onKeyReleased(Key: string, runnable: Runnable): inputClass;
+    onMouseWheelUp(runnable: Runnable): void;
+    onMouseWheelDown(runnable: Runnable): void;
     getInputList(): string;
 } declare var Input: Input;
 
@@ -71,8 +82,8 @@ interface textureClass {
     thisTexture: Texture;
     id: "number";
 
-    onClick(Boolean, Runnable): textureClass;
-    onHover(Boolean, Runnable): textureClass;
+    onClick(Boolean, runnable: Runnable): textureClass;
+    onHover(Boolean, runnable: Runnable): textureClass;
     get(): textureClass;
     setTexture(Texture): textureClass;
     getTexture(): Texture;
@@ -81,7 +92,7 @@ interface textureClass {
     setDepth(depth: number): textureClass;
     setSize(Width, Height): textureClass;
     getId(): "number";
-    onCreate(Runnable): textureClass;
+    onCreate(runnable: Runnable): textureClass;
     clone(): textureClass;
     clone(string: "New Texture location"): textureClass;
     delete();
@@ -108,23 +119,6 @@ interface ScreenText {
 
 // --- models n stuff --- //
 
-interface Vector3 {
-    toString(): string;
-    x: number;
-    y: number;
-    z: number;
-    len(): number;
-    set(val: number[]): Vector3;
-    set(x: number, y: number, z: number): Vector3;
-    set(Vector3): Vector3;
-    add(number): Vector3;
-    add(Vector3): Vector3;
-    add(x: number, y: number, z: number): Vector3;
-    clamp(min: number, max: number): Vector3;
-    cpy(): Vector3;
-    nor(): Vector3;
-}
-
 interface array<T> {
     items: T[];
     ordered: boolean;
@@ -132,25 +126,6 @@ interface array<T> {
 }
 interface ArrayMap<T0, T1> {
 
-}
-interface Matrix4 {
-    M00: number;
-    M01: number;
-    M02: number;
-    M03: number;
-    M10: number;
-    M11: number;
-    M12: number;
-    M13: number;
-    M20: number;
-    M21: number;
-    M22: number;
-    M23: number;
-    M30: number;
-    M31: number;
-    M32: number;
-    M34: number;
-    val: number[];
 }
 interface NodeKeyFrame<T> {
 
@@ -242,6 +217,7 @@ interface Animation {
 }
 interface ModelInstance {
     animations: Array<Animation>;
+    transform: Matrix4;
 }
 
 interface Environment {
@@ -265,13 +241,34 @@ interface Entity {
     //getBoundingBox():
     create(string): Model;
 } declare var Entity: Entity;
+interface EntityObject {
+    modelInstance: ModelInstance;
+    getPosition(): Vector3;
+    setPosition(x: number, y: number, z: number): Vector3;
+}
 
-interface Camera {
+interface Character {
+    setModel(shapeFile: string): EntityObject;
+    createCamera(): CameraObject;
+    // camera: CameraObject;
+    damage(int: number);
+    heal(int: number);
+    setHealth(int: number);
+    getHealth(): number;
+    onDamage(runnable: Runnable);
+    onHealthChanged(runnable: Runnable);
+} declare var Character: Character;
+interface Camera extends jV {
     update(): void;
-    lookAt(target: Vector3): void;
+    lookAt(vector3: Vector3): void;
     lookAt(x: number, y: number, z: number): void;
     translate(Vector3): void;
     translate(x: number, y: number, z: number): void;
+    transform(transform: Matrix4): void;
+    rotate(transform: Matrix4);
+    rotate(quat: Quaternion): void;
+    rotate(axis: Vector3, angle: number);
+    rotate(angle: number, axisX: number, axisY: number, axisZ: number);
     fieldOfView: number;
     up: Vector3;
     position: Vector3;
@@ -280,19 +277,19 @@ interface Camera {
     near: number;
     veiwportHeight: number;
     viewportWidth: number;
-} declare var Camera: Camera;
-
-interface Character extends Entity {
-    create(): Character;
+    invProjectionView: Matrix4;
+    projection: Matrix4;
+    view: Matrix4;
+}
+interface CameraObject {
     camera: Camera;
-    setFov(FoV: number);
-    damage(number);
-    heal(number);
-    setHealth(number);
-    getHealth(): number;
-    onDamage(Runnable);
-    onHealthChanged(Runnable);
-} declare var Character: Character;
+    setFoV(number: number): number;
+    getFoV(): number;
+    getPosition(): Vector3;
+    setPosition(x: number, y: number, z: number): Vector3;
+    lookAt(vector3: Vector3): void;
+    lookAt(x: number, y: number, z: number): void;
+}
 
 // --- network --- //
 
@@ -443,31 +440,4 @@ interface Dialog {
 
 interface Class<T> {
 
-}
-interface int extends jV {
-    //byteValue(): byte;
-    floatValue(): float;
-}
-interface Byte {
-
-} declare var byte: Byte;
-interface long extends jV {
-
-} declare var long: number;
-interface float extends jV {
-    compareTo(float: float): number;
-    longValue(): long;
-    isNaN(): boolean;
-    isInfinite(): boolean;
-    intValue(): number;
-    byteValue(): Byte;
-} declare var float: number;
-interface FloatArray<T> {
-    toFloatArray(): number[];
-    isEmpty(): boolean;
-    add(number: number): boolean;
-    remove(number: number): boolean;
-    get(number: number): float;
-    clear(): void;
-    indexOf(number: number): number;
 }

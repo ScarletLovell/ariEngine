@@ -1,5 +1,9 @@
 package engine.ari.engine_main.entity;
 
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.math.Quaternion;
 import engine.ari.engine_main.Console;
 import engine.ari.engine_main.rendering.Models;
 import com.badlogic.gdx.Gdx;
@@ -10,24 +14,83 @@ import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.math.Vector3;
 
 public class Entity {
-    public ModelLoader modelLoader = new ObjLoader();
-    protected Model characterModel = null;
-    protected ModelInstance characterInstance = null;
-    public Model create(String modelFile) {
-        if(Gdx.files.internal(modelFile).exists()) {
-            characterModel = modelLoader.loadModel(Gdx.files.internal(modelFile));
-            characterInstance = Models.addCharacterModel(characterModel);
-        } else {
-            Console.error("File "+modelFile+" does not exist...");
-            return null;
+    public static ModelLoader modelLoader = new ObjLoader();
+    public class EntityObject {
+        public ModelInstance modelInstance;
+        public Vector3 getPosition() {
+            return new Vector3(modelInstance.transform.val);
         }
-        return characterModel;
+        public Vector3 setPosition(int x, int y, int z) {
+            return new Vector3(modelInstance.transform.set(new float[]{x, y, z}).val);
+        }
     }
-    public Vector3 getPosition() {
-        return new Vector3(characterInstance.transform.val[0], characterInstance.transform.val[1], characterInstance.transform.val[2]);
+    public class CameraObject {
+        public PerspectiveCamera camera;
+        public void lookAt(Vector3 vec) {
+            camera.lookAt(vec);
+            camera.update();
+        }
+        public void lookAt(int x, int y, int z) {
+            camera.lookAt(x, y, z);
+            camera.update();
+        }
+        public float setFoV(float fov) {
+            camera.fieldOfView = fov;
+            camera.update();
+            return camera.fieldOfView;
+        }
+        public float getFoV() {
+            return camera.fieldOfView;
+        }
+        public Vector3 getPosition() {
+            return camera.position;
+        }
+        public Vector3 setPosition(int x, int y, int z) {
+            Vector3 vec = camera.position.set(new float[]{x, y, z});
+            camera.update();
+            return vec;
+        }
     }
-    public void setPosition(int x, int y, int z) {
-        characterInstance.transform.set(new float[]{x,y,z});
+    public EntityObject replaceExisting(String modelFile, EntityObject obj) {
+        Model model;
+        ModelInstance instance;
+        FileHandle file = Gdx.files.internal(modelFile);
+        if(file.exists()) {
+            model = modelLoader.loadModel(Gdx.files.internal(modelFile));
+            instance = new ModelInstance(model);
+        } else {
+            file = Gdx.files.external(modelFile);
+            if(file.exists()) {
+                model = modelLoader.loadModel(file);
+                instance = new ModelInstance(model);
+            } else {
+                Console.error("File " + modelFile + " does not exist...");
+                return obj;
+            }
+        }
+        obj.modelInstance = instance;
+        return obj;
+    }
+    public EntityObject create(String modelFile) {
+        Model model;
+        ModelInstance instance;
+        FileHandle file = Gdx.files.internal(modelFile);
+        if(file.exists()) {
+            model = modelLoader.loadModel(Gdx.files.internal(modelFile));
+            instance = new ModelInstance(model);
+        } else {
+            file = Gdx.files.external(modelFile);
+            if(file.exists()) {
+                model = modelLoader.loadModel(file);
+                instance = new ModelInstance(model);
+            } else {
+                Console.error("File " + modelFile + " does not exist...");
+                return null;
+            }
+        }
+        EntityObject obj = new EntityObject();
+        obj.modelInstance = instance;
+        return obj;
     }
 
     /*public BoundingBox getBoundingBox() {

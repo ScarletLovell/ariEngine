@@ -1,5 +1,8 @@
 package engine.ari.engine_main.entity;
 
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Matrix4;
 import engine.ari.engine_main.Console;
 import engine.ari.engine_main.Engine;
@@ -10,43 +13,39 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 
 public class Character extends Entity {
-    public static PerspectiveCamera camera;
+    public static Entity.EntityObject character;
+    public static Entity.CameraObject camera;
     public static CameraInputController camController;
     private static Integer health = 100;
     private static Integer oldHealth = health;
     private Engine Engine = new Engine();
-    @Override
-    public Model create(String modelFile) {
-        if(Gdx.files.internal(modelFile).exists() || Gdx.files.external(modelFile).exists()) {
-            if (camera == null) {
-                camera = new PerspectiveCamera(70, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                camController = new CameraInputController(camera);
-                camera.position.set(new Vector3(10, 10, 10));
-                camera.fieldOfView = 75;
-                camera.near = 1f;
-                camera.far = 300f;
-                camera.update();
-            }
+
+    private Entity entity = new Entity();
+
+    public Character setModel(String modelFile) {
+        if(character != null) {
+            Console.warn("Replacing already existing character model...");
+            entity.replaceExisting(modelFile, character);
+            return this;
         }
-        return super.create(modelFile);
-    }
-    public void create() { // nullable model
-        if (camera == null) {
-            camera = new PerspectiveCamera(70, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            camController = new CameraInputController(camera);
-            camera.position.set(new Vector3(10, 10, 10));
-            camera.fieldOfView = 75;
-            camera.near = 1f;
-            camera.far = 300f;
-            camera.update();
-        }
-    }
-    public Model replace(String modelFile) {
-        return create(modelFile);
+        character = new Entity().create(modelFile);
+        return this;
     }
 
-    public void setFov(int fov) {
-        camera.fieldOfView = fov;
+    public CameraObject createCamera() {
+        if (camera != null) {
+            Console.warn("Creating a new Camera and overwriting the old...");
+            camera.camera = null;
+            camera = null;
+        }
+        camera = new Entity.CameraObject();
+        camera.camera = new PerspectiveCamera(70, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camController = new CameraInputController(camera.camera);
+        camera.setPosition(10, 10, 10);
+        camera.camera.near = 1f;
+        camera.camera.far = 300f;
+        camera.camera.update();
+        return camera;
     }
 
     public void damage(Integer amount) {
@@ -94,15 +93,11 @@ public class Character extends Entity {
     public void render() {
         if(Engine.getPaused())
             return;
-        if(characterModel != null) {
-            if(!health.equals(oldHealth) && damageRunnable != null) {
-                damageRunnable.run();
-                oldHealth = health;
-            }
-            //camera.position.set(getPosition());
-            camera.lookAt(getPosition());
-            camera.position.set(new Vector3(10, 10, 10));
-            camera.update();
+        if(character == null)
+            return;
+        if(!health.equals(oldHealth) && damageRunnable != null) {
+            damageRunnable.run();
+            oldHealth = health;
         }
     }
 }

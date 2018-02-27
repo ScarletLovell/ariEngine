@@ -18,8 +18,13 @@ function main_test() {
     float = Engine.NewFloat(1, 1);
     Console.log(float.isEmpty()); // returns false
 
-    Character.create();
-    Character.setFov(120);
+    Engine.setTitle("Test");
+
+    var m = Character.setModel("assets/models/untitled.obj");
+    var Camera = Character.createCamera();
+    Camera.setPosition(50, 50, 50);
+    // var Camera = Character.createCamera().camera;
+    Camera.setFoV(120);
     Character.setHealth(99);
 
     var model = Model.createBox()
@@ -29,6 +34,7 @@ function main_test() {
         .setMaterial(new Material(ColorAttribute.createDiffuse(Color.WHITE)))
         .build();
     model.transform.translate(0, 15, 0);
+    Camera.camera.lookAt(model.transform.val[0], model.transform.val[1], model.transform.val[2]);
 
     return "no";
 

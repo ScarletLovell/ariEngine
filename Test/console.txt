@@ -4,36 +4,33 @@
 [LOG]: Disabled VSync 
 [WARN]: Preparing to check for mods... 
 [WARN]: [MOD LOADER]: Preparing to evaluate 'setup.ts' 
-[33m   [10:3:50 setup.ts, WARN][0m: entry point 
-[33m   [10:3:50 setup.ts, WARN][0m: There is no main_setup function located in the script, ignoring instead... 
+[33m   [4:24:3 setup.ts, WARN][0m: entry point 
+[33m   [4:24:3 setup.ts, WARN][0m: There is no main_setup function located in the script, ignoring instead... 
 [WARN]: [MOD LOADER]: Failed to execute setup.ts, null 
 [WARN]: [MOD LOADER]: Preparing to evaluate 'test.ts' 
 [LOG]: Created a new texture with the id: 1 
 [LOG]: Created a new texture with the id: 0 
 [LOG]: Created a new screen_text: 0 
-   [10:3:50 test.ts, LOG]: 
+   [4:24:3 test.ts, LOG]: 
 
 SHOWING METHODS OF screenTextClass:
 delete ( )
 setColor ( Color )
-setScale ( float )
-setPosition ( int, int )
-setText ( String )
 setBold ( Boolean )
 setItalic ( Boolean )
+setText ( String )
+setScale ( float )
+setPosition ( int, int )
 
  
-   [10:3:50 test.ts, LOG]: true 
-   [10:3:50 test.ts, LOG]: false 
-   [10:3:50 test.ts, LOG]: created a model 
-   [10:3:50 test.ts, LOG]: made depth to model 
-   [10:3:50 test.ts, LOG]: set height to model 
-   [10:3:50 test.ts, LOG]: made model size 
-   [10:3:50 test.ts, LOG]: made material 
-[ERROR]: Missing width field on model creation 
-   [10:3:50 test.ts, LOG]: built model 
+   [4:24:4 test.ts, LOG]: true 
+   [4:24:4 test.ts, LOG]: false 
+[LOG]: Set game title to: Test 
+[WARN]: 15.0 
+[WARN]: 15.0 15.0 0.0 com.badlogic.gdx.graphics.g3d.Material@3be727aa 
 [LOG]: [MOD LOADER]: Executed 1/2 mods 
 [LOG]: test.ts returned with: no 
+[LOG]: pause 
 [LOG]: pause 
 [WARN]: Preparing to quit... 
 [WARN]: Getting rid of all textures... 
