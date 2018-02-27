@@ -38,6 +38,4 @@ ___
 Use the [wiki](https://github.com/Ashleyz4/ariEngine/wiki) for stuff (might not be done)
 
 
-___
 
-<iframe src="https://discordapp.com/widget?id=398246624666714142&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
