@@ -19,7 +19,7 @@ ___
 ```javascript
 /// <reference path='../index.d.ts'/>
 ```
-###### I will create a wiki source for this soon explaining how TypeScript works for JS.
+###### For more information on TypeScript, see [this page](https://github.com/Ashleyz4/ariEngine/wiki/Using-ariEngine-Modifications)
 
 
 
