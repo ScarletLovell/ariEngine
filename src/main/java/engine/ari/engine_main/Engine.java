@@ -1,11 +1,16 @@
 package engine.ari.engine_main;
 
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.files.FileHandle;
 import engine.ari.engine_main.rendering.Screen_Text;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -25,6 +30,13 @@ public class Engine {
     public Boolean getWasAlreadyPaused() { return was_already_paused; }
     public void pause(Boolean pause, Boolean wp) {
         Gdx.graphics.setContinuousRendering(pause);
+    }
+
+    public int getFPS() {
+        return Gdx.app.getGraphics().getFramesPerSecond();
+    }
+    public void setIcon(String file) {
+        // i actually have no idea how to do this
     }
 
     public void setTitle(String title) {

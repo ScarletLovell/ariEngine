@@ -37,25 +37,24 @@ module math {
         cpy(): Vector3;
         nor(): Vector3;
     }
-    /*export interface int extends jV {
-        //byteValue(): byte;
-        floatValue(): float;
+    export interface Integer extends jV {
+        floatValue(): Float;
     }
     export interface Byte {
 
     }
-    interface long extends jV {
+    export interface Long extends jV {
 
     }
-    interface Float extends jV {
-        compareTo(float: float): number;
-        longValue(): long;
+    export interface Float extends jV {
+        compareTo(float: Float): number;
+        longValue(): Long;
         isNaN(): boolean;
         isInfinite(): boolean;
-        intValue(): number;
+        intValue(): Integer;
         byteValue(): Byte;
     }
-    interface FloatArray<T> {
+    export interface FloatArray<T> {
         toFloatArray(): number[];
         isEmpty(): boolean;
         add(number: number): boolean;
@@ -63,6 +62,6 @@ module math {
         get(number: number): Float;
         clear(): void;
         indexOf(number: number): number;
-    }*/
+    }
     
 }

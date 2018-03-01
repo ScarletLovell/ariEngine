@@ -1,27 +1,21 @@
-# ariEngine (Ant-Engine)
-___My WIP Game Engine made in Java___
+<span style="display:block;text-align:center">![ariEngine](logo.png)</span>
 
 
-# WARNING:
-###### The game engine is ***very very*** far from done, if you'd like to help with progress, please make an issue or pull request helping me with this project
-
+# Hello!
+###### This engine is in very early stages of development and may be very finicky to mess with and anything is subject to change at any time. Please only use with caution, thank you!
 
 ___
 
 [![travis](https://travis-ci.org/Ashleyz4/ariEngine.svg?branch=master)]()
 [![Release](https://img.shields.io/github/release/Ashleyz4/ariEngine.svg?label=Release&maxAge=60)](https://github.com/Ashleyz4/ariEngine/releases/latest)
-<br/>
+[![Discord](https://ptb.discordapp.com/api/guilds/398246624666714142/widget.png)](https://discord.gg/a4bPrMf)
+
+___
 
 ### Using this?
 #### Download the repo, compile it yourself using mvn package, then create modifications using content/javascript/scripts/yourFile.ts
 
-###### All TypeScript files you have in your scripts folder should contain a reference to TS at the top for syntax error checking:
-```javascript
-/// <reference path='../index.d.ts'/>
-```
-###### For more information on TypeScript, see [this page](https://github.com/Ashleyz4/ariEngine/wiki/Using-ariEngine-Modifications)
-
-
+### See the wiki for information on how to use the engine properly [here](http://www.github.com/Ashleyz4/ariEngine/wiki)
 
 
 ___
@@ -36,6 +30,3 @@ ___
 
 ## Using certain features
 Use the [wiki](https://github.com/Ashleyz4/ariEngine/wiki) for stuff (might not be done)
-
-
-

@@ -25,7 +25,7 @@ public class Main extends js_engine {
         Float[] f = {0f, 0f, 0f};
         //models.create(f, 500f, 0.5f, 30f, new Material(ColorAttribute.createDiffuse(Color.WHITE)), null);
         character.create("assets/models/untitled.obj");
-        character.setFov(95);
+        //character.setFov(95);
         createHealth();
         Console.log("Game is up");
         render();

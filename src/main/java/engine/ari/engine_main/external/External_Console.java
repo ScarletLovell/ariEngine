@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class External_Console extends Console {
 
-    private static Process cmd;
+    public static boolean open = false;
 
     public static JFrame jFrame = null;
     private static JTextPane jText = null;
@@ -70,15 +70,19 @@ public class External_Console extends Console {
         jFrame.setVisible(true);
         jFrame.setFocusable(true);
         jFrame.setEnabled(true);
+
+        open = true;
     }
     public void Deinitalize() {
-        if(cmd == null)
+        if(!open)
             return;
         jFrame.setEnabled(false);
         jFrame.removeAll();
         jFrame.dispose();
         jScrollPane = null;
         jFrame = null;
+
+        open = false;
     }
     public void addToConsole(String s) {
         if(doc == null)

@@ -1,5 +1,5 @@
-// Created by Ashleyz
-    // http://www.github.com/Anthonyrules144
+// Created by Ashleyz4
+    // http://www.github.com/Ashleyz4
 
 /// <reference path='../index.d.ts'/>
 // This makes the Visual Studio Code app initialize TypeScript

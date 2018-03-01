@@ -1,0 +1,4 @@
+ariEngine Test v0.11.2
+
+Place the jar with depends into this folder, and run it and it will capture all scripts in content/javascript/scripts/
+You can change the scripts by editing the main test script test.ts

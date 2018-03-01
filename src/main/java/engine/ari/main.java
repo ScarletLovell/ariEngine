@@ -29,11 +29,7 @@ public class main extends ApplicationAdapter {
 	private Input input = new Input();
 	private Engine.config config = new Engine.config();
 	private engine.ari.engine_main.rendering.render render = new render();
-	private Textures textures = new Textures();
-	private Environment environment = new Environment();
-	private static Screen_Text screen_text = new Screen_Text();
 	private Character character = new Character();
-	private External_Console external_console = new External_Console();
 
 	private Integer tick_prepare = 0;
 
@@ -52,6 +48,8 @@ public class main extends ApplicationAdapter {
 		} else {
 			title = "ariEngine [no title chosen]";
 		}
+
+
 
 		Console.warn("Creating JavaScript engine via Rhino");
 		FileHandle file = Gdx.files.local("./console.txt");

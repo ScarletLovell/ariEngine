@@ -1,6 +1,7 @@
 package engine.ari.engine_main;
 
 import com.badlogic.gdx.Gdx;
+import static com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 import java.util.*;
@@ -8,22 +9,47 @@ import java.util.List;
 
 public class Input extends Engine implements InputProcessor {
 
+    public enum keys {
+        ANY_KEY,
+        SPACE,
+        A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, Y, X, Z,
+        F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F12,
+        NUM, NUM_0, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6, NUM_7, NUM_8, NUM_9,
+        NUMPAD0, NUMPAD1, NUMPAD2, NUMPAD3, NUMPAD4, NUMPAD5, NUMPAD6, NUMPAD7, NUMPAD8, NUMPAD9,
+        PAGE_UP, PAGE_DOWN, SOFT_LEFT, SOFT_RIGHT,
+        DOWN, UP, LEFT, RIGHT,
+        ALT_LEFT, ALT_RIGHT, CONTROL_LEFT, CONTROL_RIGHT, SHIFT_LEFT, SHIFT_RIGHT,
+        LEFT_BRACKET, RIGHT_BRACKET,
+        BUTTON_A, BUTTON_B, BUTTON_C, BUTTON_X, BUTTON_Y, BUTTON_Z,
+        BUTTON_CIRCLE, BUTTON_SELECT, BUTTON_START, BUTTON_THUMBL, BUTTON_THUMBR,
+        BUTTON_R1, BUTTON_R2, BUTTON_L1, BUTTON_L2,
+        DPAD_CENTER, DPAD_UP, DPAD_DOWN, DPAD_RIGHT, DPAD_LEFT,
+        COLON, COMMA, PERIOD, SEMICOLON, STAR,
+        GRAVE, TAB, APOSTROPHE, AT, BACKSPACE,
+        MINUS, PLUS, POWER, POUND, SLASH, BACKSLASH,
+        DEL, END, HOME, ENTER, FORWARD_DEL, INSERT,
+        ESCAPE,
+        UNKNOWN,
+    }
+    public Input() {
+    }
+
     private static List<inputClass> inputs = new ArrayList<>();
     private List<String> pressingKeys = new ArrayList<>();
     private int getKeyFromGdx(String key) {
-        int gdxKey = com.badlogic.gdx.Input.Keys.valueOf(key.toUpperCase());
+        int gdxKey = Keys.valueOf(key.toUpperCase());
         if(gdxKey == -1) {
             switch (key) {
                 case "CTRL_LEFT":
                 case "CONTROL_LEFT":
                 case "LEFT_CTRL":
                 case "LEFT_CONTROL":
-                    return com.badlogic.gdx.Input.Keys.CONTROL_LEFT;
+                    return Keys.CONTROL_LEFT;
                 case "CTRL_RIGHT":
                 case "CONTROL_RIGHT":
                 case "RIGHT_CTRL":
                 case "RIGHT_CONTROL":
-                    return com.badlogic.gdx.Input.Keys.CONTROL_RIGHT;
+                    return Keys.CONTROL_RIGHT;
                 default:
                     return -1;
             }
@@ -117,12 +143,25 @@ public class Input extends Engine implements InputProcessor {
         String[] key = keys.split(", ");
         for(int i=0;i < key.length;i++) {
             if(getKeyFromGdx(key[i]) == -1) {
-                Console.error("Key \'"+key[i]+"\' is invalid for: "+keys);
+                Console.error("Key \'"+key[i]+"\' is an invalid key from: "+keys);
                 return null;
             }
         }
         inputClass inputClass = new inputClass();
         inputClass.keys = keys;
+        inputClass.runnable = runnable;
+        inputClass.pressed = 0;
+        inputs.add(inputClass);
+        return inputClass;
+    }
+    public inputClass onKeyPressed(keys keys, Runnable runnable) {
+        String key = keys.toString();
+        if(getKeyFromGdx(key) == -1) {
+            Console.error("Key \'"+key+"\' is an invalid key");
+            return null;
+        }
+        inputClass inputClass = new inputClass();
+        inputClass.keys = key;
         inputClass.runnable = runnable;
         inputClass.pressed = 0;
         inputs.add(inputClass);
@@ -143,6 +182,15 @@ public class Input extends Engine implements InputProcessor {
         inputs.add(inputClass);
         return inputClass;
     }
+    public inputClass onKeyJustPressed(int keys, Runnable runnable) {
+        String key = Keys.toString(keys);
+        inputClass inputClass = new inputClass();
+        inputClass.keys = key;
+        inputClass.runnable = runnable;
+        inputClass.pressed = 1;
+        inputs.add(inputClass);
+        return inputClass;
+    }
     public inputClass onKeyReleased(String keys, Runnable runnable) {
         String[] key = keys.split(", ");
         for(int i=0;i < key.length;i++) {
@@ -153,6 +201,15 @@ public class Input extends Engine implements InputProcessor {
         }
         inputClass inputClass = new inputClass();
         inputClass.keys = keys;
+        inputClass.runnable = runnable;
+        inputClass.pressed = 2;
+        inputs.add(inputClass);
+        return inputClass;
+    }
+    public inputClass onKeyReleased(int keys, Runnable runnable) {
+        String key = Keys.toString(keys);
+        inputClass inputClass = new inputClass();
+        inputClass.keys = key;
         inputClass.runnable = runnable;
         inputClass.pressed = 2;
         inputs.add(inputClass);
@@ -186,8 +243,8 @@ public class Input extends Engine implements InputProcessor {
         }
         return false;
     }
-    public boolean keyDown(int keyCode) {  return false; }
 
+    public boolean keyDown(int keyCode) {  return false; }
     public boolean keyUp(int keycode) {
         for (inputClass inputClass : inputs) {
             if(inputClass.pressed < 1)

@@ -1,22 +1,25 @@
 package engine.ari.engine_main.entity;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import engine.ari.engine_main.Console;
-import engine.ari.engine_main.rendering.Models;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.math.Vector3;
-
 public class Entity {
     public static ModelLoader modelLoader = new ObjLoader();
-    public class EntityObject {
+    public class EntityObject{
         public ModelInstance modelInstance;
+        public AnimationController animation;
+        public EntityObject(ModelInstance target) {
+            modelInstance = target;
+            animation = new AnimationController(target);
+        }
+
         public Vector3 getPosition() {
             return new Vector3(modelInstance.transform.val);
         }
@@ -88,9 +91,7 @@ public class Entity {
                 return null;
             }
         }
-        EntityObject obj = new EntityObject();
-        obj.modelInstance = instance;
-        return obj;
+        return new EntityObject(instance);
     }
 
     /*public BoundingBox getBoundingBox() {

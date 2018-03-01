@@ -1,8 +1,12 @@
 
 // --- imports --- //
 /// <reference path='./ts/math.ts'/>
+/// <reference path='./ts/input.ts'/>
 import Matrix4 = math.Matrix4;
 import Vector3 = math.Vector3;
+import FloatArray = math.FloatArray;
+import Input = input.Input;
+declare var Input: Input; 
 
 // --- much needed functions --- //
 interface Runnable {
@@ -14,7 +18,7 @@ interface Runnable {
 // --- much needed classes --- //
 interface jV {
     equals(Object): boolean;
-    tostring(): string;
+    toString(): string;
 }
 
 // --- any other class --- //
@@ -50,21 +54,6 @@ interface Timer {
     start(Delay: number, Ticks: number, runnable: Runnable): Timer;
     end(): void;
 } declare var Timer: Timer;
-
-interface inputClass {
-    runnable; pressed; key;
-    setInput(runnable: Runnable): inputClass;
-    setPressType(Boolean): inputClass;
-    remove();
-}
-interface Input {
-    onKeyPressed(Key: string, runnable: Runnable): inputClass;
-    onKeyJustPressed(Key: string, runnable: Runnable): inputClass;
-    onKeyReleased(Key: string, runnable: Runnable): inputClass;
-    onMouseWheelUp(runnable: Runnable): void;
-    onMouseWheelDown(runnable: Runnable): void;
-    getInputList(): string;
-} declare var Input: Input;
 
 interface Texture {
     new(Location: string): Texture;
@@ -241,6 +230,24 @@ interface Entity {
     //getBoundingBox():
     create(string): Model;
 } declare var Entity: Entity;
+interface AnimationDesc {
+    
+}
+interface AnimationController {
+    current: AnimationDesc;
+    previous: AnimationDesc;
+    queued: AnimationDesc;
+    inAction: boolean;
+    paused: boolean;
+    allowSameAnimation: boolean;
+    queuedTransitionTime: number;
+    transitionCurrentTime: number;
+    transitionTargetTime: number;
+    target: ModelInstance;
+    setAnimation(id: string): AnimationDesc;
+    setAnimation(id: string, loopCount: number): AnimationDesc;
+    update(delta: number): void;
+}
 interface EntityObject {
     modelInstance: ModelInstance;
     getPosition(): Vector3;

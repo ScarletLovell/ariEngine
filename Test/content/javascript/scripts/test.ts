@@ -1,5 +1,5 @@
-// Created by Ashleyz
-    // http://www.github.com/Ashleyz
+// Created by Ashleyz4
+    // http://www.github.com/Ashleyz4
 
 /// <reference path='../index.d.ts'/>
 // This makes the Visual Studio Code app initialize TypeScript syntax error checking
@@ -12,6 +12,10 @@
 
 // All files are required to have main_[file] as a function or they will be ignored
 function main_test() {
+    Input.onKeyPressed(Input.keys.A, new Runnable(function() {
+        Console.warn("hi");
+    }));
+    Console.log("Key " + Input.keys.A);
     var float = Engine.NewFloat();
     Console.log(float.isEmpty()); // returns true
 
