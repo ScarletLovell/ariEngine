@@ -4,48 +4,45 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>libgdx</groupId>
-    <artifactId>libgdx_new</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>ariEngine</groupId>
+    <artifactId>ariEngine_new</artifactId>
+    <version>0.2</version>
+    
+
+    <developers>
+        <developer>
+            <roles>
+                <role>dev</role>
+            </roles>
+            <id>0</id>
+            <name>Ashleyz4</name>
+            <organization>Forever Games</organization>
+            <url>https://github.com/Ashleyz4</url>
+        </developer>
+    </developers>
+
 
     <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases><enabled>false</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+    </repositories>
+    <!--<repositories>
         <repository>
             <id>gdx-nightlies</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
-    </repositories>
+    </repositories>-->
+
+    <properties>
+        <lwjgl.version>3.1.6</lwjgl.version>
+    </properties>
+
     <dependencies>
-        <!--GDX-->
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx</artifactId>
-            <version>1.9.6</version>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-backend-lwjgl</artifactId>
-            <version>1.9.6</version>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-platform</artifactId>
-            <version>1.9.6</version>
-            <classifier>natives-desktop</classifier>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-platform</artifactId>
-            <version>1.9.6</version>
-            <classifier>natives-armeabi-v7a</classifier>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-backend-gwt</artifactId>
-            <version>1.9.6</version>
-            <classifier>sources</classifier>
-            <scope>provided</scope>
-        </dependency>
+        <!--RIP LibGDX-->
 
         <!---->
         <!--We're not using these because it's too much work to include them as libs-->
@@ -73,7 +70,72 @@
             <version>1.1.1</version>
         </dependency>
 
+
+        <!--HERE'S THE GOODS BOSS-->
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-assimp</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-bgfx</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-egl</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-glfw</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-jawt</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-jemalloc</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-lmdb</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-lz4</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-nanovg</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-nfd</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-nuklear</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-odbc</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-openal</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-opencl</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-opengl</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-opengles</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-openvr</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-ovr</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-par</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-remotery</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-rpmalloc</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-sse</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-stb</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-tinyexr</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-tinyfd</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-tootle</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-vulkan</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-xxhash</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-yoga</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-zstd</artifactId><version>${lwjgl.version}</version></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-assimp</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-bgfx</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-glfw</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-jemalloc</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-lmdb</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-lz4</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-nanovg</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-nfd</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-nuklear</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-openal</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-opengl</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-opengles</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-openvr</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-ovr</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-par</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-remotery</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-rpmalloc</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-sse</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-stb</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-tinyexr</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-tinyfd</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-tootle</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-xxhash</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-yoga</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
+        <dependency><groupId>org.lwjgl</groupId><artifactId>lwjgl-zstd</artifactId><version>${lwjgl.version}</version><classifier>${lwjgl.natives}</classifier></dependency>
     </dependencies>
+
+    <profiles>
+        <profile><id>lwjgl-natives-linux</id><activation><os><family>unix</family></os></activation><properties><lwjgl.natives>natives-linux</lwjgl.natives></properties></profile>
+        <profile><id>lwjgl-natives-macos</id><activation><os><family>mac</family></os></activation><properties><lwjgl.natives>natives-macos</lwjgl.natives></properties></profile>
+        <profile><id>lwjgl-natives-windows</id><activation><os><family>windows</family></os></activation><properties><lwjgl.natives>natives-windows</lwjgl.natives></properties></profile>
+    </profiles>
 
     <build>
         <extensions>
@@ -88,10 +150,25 @@
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.0.0</version>
+                <configuration>
+                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                    <filesets>
+                        <fileset>
+                            <directory>target</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/${project.artifactId}-${project.version}-jar-with-dependencies.jar</exclude>
+                                <exclude>**/dev.bat</exclude>
+                            </excludes>
+                        </fileset>
+                    </filesets>
+                </configuration>
                 <executions>
                     <execution>
                         <id>auto-clean</id>
-                        <phase>initialize</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>clean</goal>
                         </goals>
@@ -149,6 +226,22 @@
         </pluginManagement>
 
         <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/dev.bat</include>
+                </includes>
+                <targetPath>../</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/dev.bat</exclude>
+                </excludes>
+                <targetPath>../</targetPath>
+            </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>

@@ -2,7 +2,7 @@
 
 
 # Hello!
-###### This engine is in very early stages of development and may be very finicky to mess with and anything is subject to change at any time. Please only use with caution, thank you!
+###### This version of the game engine literally does nothing yet, if you're curious, please use the LibGDX version
 
 ___
 

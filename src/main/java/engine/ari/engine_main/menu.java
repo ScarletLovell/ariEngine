@@ -1,14 +1,11 @@
 package engine.ari.engine_main;
 
 import engine.ari.engine_main.rendering.Textures;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-
-import com.badlogic.gdx.graphics.Texture;
 
 import java.util.HashMap;
 
 public class menu {
-    private engine.ari.engine_main.rendering.Textures Textures = new Textures();
+    /*private engine.ari.engine_main.rendering.Textures Textures = new Textures();
     private Console Console = new Console();
     private Boolean js = false;
     public void applyJS(Boolean b, Integer code) {
@@ -42,5 +39,5 @@ public class menu {
         if(!buttons.button.containsKey(buttonName)) {
             engine.ari.engine_main.Console.log("Could not find the button by the name: " + buttonName);
         }
-    }
+    }*/
 }

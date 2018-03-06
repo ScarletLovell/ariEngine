@@ -1,21 +1,12 @@
 package engine.ari.engine_main.entity;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.math.Matrix4;
 import engine.ari.engine_main.Console;
 import engine.ari.engine_main.Engine;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.math.Vector3;
 
 public class Character extends Entity {
-    public static Entity.EntityObject character;
+    /*public static Entity.EntityObject character;
     public static Entity.CameraObject camera;
-    public static CameraInputController camController;
+    //public static CameraInputController camController;
     private static Integer health = 100;
     private static Integer oldHealth = health;
     private Engine Engine = new Engine();
@@ -39,7 +30,7 @@ public class Character extends Entity {
             camera = null;
         }
         camera = new Entity.CameraObject();
-        camera.camera = new PerspectiveCamera(70, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        /*camera.camera = new PerspectiveCamera(70, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camController = new CameraInputController(camera.camera);
         camera.setPosition(10, 10, 10);
         camera.camera.near = 1f;
@@ -99,5 +90,5 @@ public class Character extends Entity {
             damageRunnable.run();
             oldHealth = health;
         }
-    }
+    }*/
 }

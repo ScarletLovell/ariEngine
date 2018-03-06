@@ -1,25 +1,36 @@
 
 // --- imports --- //
-/// <reference path='./ts/math.ts'/>
-/// <reference path='./ts/input.ts'/>
+/// <reference path='./ts/math.d.ts'/>
+/// <reference path='./ts/input.d.ts'/>
 import Matrix4 = math.Matrix4;
 import Vector3 = math.Vector3;
 import FloatArray = math.FloatArray;
 import Input = input.Input;
 declare var Input: Input; 
 
-// --- much needed functions --- //
-interface Runnable {
-    // i have been working on trying to get this to work in TypeScript forever
-    // i have finally done it :D
-    new(Function: Function): Runnable;
-} declare var Runnable: Runnable;
+// --- much needed stuff --- //
+declare var exports: any;
+interface Script {
+    new(f: Function): any;
+    exists(scriptName: string): boolean;
+} declare var Script: Script;
+declare var java: any;
+declare function load(file: string): any;
 
-// --- much needed classes --- //
+interface JavaImporter {
+    new(...objects): any;
+} declare var JavaImporter: JavaImporter;
 interface jV {
     equals(Object): boolean;
     toString(): string;
 }
+interface Java {
+    type(c: string): any;
+    extend(any, f: Function): any;
+} declare var Java: Java;
+interface Runnable {
+    new(Function: Function): Runnable;
+} declare var Runnable: Runnable;
 
 // --- any other class --- //
 
@@ -273,7 +284,7 @@ interface Camera extends jV {
     translate(x: number, y: number, z: number): void;
     transform(transform: Matrix4): void;
     rotate(transform: Matrix4);
-    rotate(quat: Quaternion): void;
+    //rotate(quat: Quaternion): void;
     rotate(axis: Vector3, angle: number);
     rotate(angle: number, axisX: number, axisY: number, axisZ: number);
     fieldOfView: number;

@@ -1,13 +1,9 @@
 package engine.ari.engine_main;
 
-import com.badlogic.gdx.Gdx;
-import static com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputProcessor;
-
 import java.util.*;
 import java.util.List;
 
-public class Input extends Engine implements InputProcessor {
+public class Input extends Engine {
 
     public enum keys {
         ANY_KEY,
@@ -37,7 +33,7 @@ public class Input extends Engine implements InputProcessor {
     private static List<inputClass> inputs = new ArrayList<>();
     private List<String> pressingKeys = new ArrayList<>();
     private int getKeyFromGdx(String key) {
-        int gdxKey = Keys.valueOf(key.toUpperCase());
+        /*int gdxKey = Keys.valueOf(key.toUpperCase());
         if(gdxKey == -1) {
             switch (key) {
                 case "CTRL_LEFT":
@@ -54,7 +50,8 @@ public class Input extends Engine implements InputProcessor {
                     return -1;
             }
         } else
-            return gdxKey;
+            return gdxKey;*/
+        return -1;
     }
     public void input()
     { // LibGDX is very weird about inputs, and since this is the only reliable solution, here it is.
@@ -74,12 +71,12 @@ public class Input extends Engine implements InputProcessor {
                     continue;
                 }
                 //if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ANY_KEY)) {
-                if (pressed < 2 && Gdx.input.isKeyPressed(key) || pressed == 2 && !inputClass.isBeingHeld) {
+                /*if (pressed < 2 && Gdx.input.isKeyPressed(key) || pressed == 2 && !inputClass.isBeingHeld) {
                     keyPressing++;
                 } else {
                     cont = false;
                     break;
-                }
+                }*/
                 /*} else if(pressingKeys.contains(keys[i])) {
                     if(pressed == 2)
                         inputClass.runnable.run();
@@ -182,7 +179,7 @@ public class Input extends Engine implements InputProcessor {
         inputs.add(inputClass);
         return inputClass;
     }
-    public inputClass onKeyJustPressed(int keys, Runnable runnable) {
+    /*public inputClass onKeyJustPressed(int keys, Runnable runnable) {
         String key = Keys.toString(keys);
         inputClass inputClass = new inputClass();
         inputClass.keys = key;
@@ -190,7 +187,7 @@ public class Input extends Engine implements InputProcessor {
         inputClass.pressed = 1;
         inputs.add(inputClass);
         return inputClass;
-    }
+    }*/
     public inputClass onKeyReleased(String keys, Runnable runnable) {
         String[] key = keys.split(", ");
         for(int i=0;i < key.length;i++) {
@@ -206,7 +203,7 @@ public class Input extends Engine implements InputProcessor {
         inputs.add(inputClass);
         return inputClass;
     }
-    public inputClass onKeyReleased(int keys, Runnable runnable) {
+    /*public inputClass onKeyReleased(int keys, Runnable runnable) {
         String key = Keys.toString(keys);
         inputClass inputClass = new inputClass();
         inputClass.keys = key;
@@ -214,7 +211,7 @@ public class Input extends Engine implements InputProcessor {
         inputClass.pressed = 2;
         inputs.add(inputClass);
         return inputClass;
-    }
+    }*/
     private static List<Runnable> mouseWheelUpInput = new ArrayList<>();
     public void onMouseWheelUp(Runnable runnable) {
         mouseWheelUpInput.add(runnable);

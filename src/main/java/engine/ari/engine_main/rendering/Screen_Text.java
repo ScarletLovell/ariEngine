@@ -1,7 +1,6 @@
 package engine.ari.engine_main.rendering;
 
 import engine.ari.engine_main.Console;
-import com.badlogic.gdx.graphics.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +8,7 @@ import java.util.HashMap;
 public class Screen_Text {
     public static ArrayList<Integer> screen_text_list = new ArrayList<>();
     public static HashMap<Integer, String> screen_texts = new HashMap<>();
-    public static HashMap<Integer, Color> screen_text_color = new HashMap<>();
+    //public static HashMap<Integer, Color> screen_text_color = new HashMap<>();
     public static HashMap<Integer, Integer> screen_text_x = new HashMap<>();
     public static HashMap<Integer, Integer> screen_text_y = new HashMap<>();
     public static HashMap<Integer, Float> screen_scale = new HashMap<>();
@@ -28,10 +27,10 @@ public class Screen_Text {
             screen_texts.put(id, text);
             return this;
         }
-        public screenTextClass setColor(Color color) {
+        /*public screenTextClass setColor(Color color) {
             screen_text_color.put(id, color);
             return this;
-        }
+        }*/
         public screenTextClass setScale(float size) {
             screen_scale.put(id, size);
             return this;
@@ -49,7 +48,7 @@ public class Screen_Text {
         public void delete() {
             screen_text_list.remove(id);
             screen_texts.remove(id);
-            screen_text_color.remove(id);
+            //screen_text_color.remove(id);
             screen_text_x.remove(id);
             screen_text_y.remove(id);
         }

@@ -9,8 +9,21 @@
 //  - var classes = Engine.getMethodsOfClass(object);
 //  - var super = Engine.getSuperClassOfClass(object);
 
+// All files are required to have a new Script func or any functions will be ignored.
+function main_test() {
+    /*new Script(function() {
+        Console.log("Hello from Script!");
+    });*/
+    Console.log("Entry point to test.ts!");
+    var Texture = Textures.addTexture(1, "assets/sprites/Ant-2-1.png")
+        .setActive(1);
+    return 1;
+};
 
-// All files are required to have main_[file] as a function or they will be ignored
+
+// ANYTHING BELOW THIS LINE WON'T WORK RIGHT NOW
+
+/*
 function main_test() {
     Input.onKeyPressed(Input.keys.A, new Runnable(function() {
         Console.warn("hi");
@@ -53,9 +66,9 @@ function main_test() {
         .setDepth(0);
 
     // Textures with interaction
-    clickableTexture1.onHover(true /*This shows that it WAS hovered*/, new Runnable(function() {
+    clickableTexture1.onHover(true, new Runnable(function() {
         clickableTexture1.setTexture("assets/sprites/Ant-2-2.png");
-    })).onHover(false /*This shows that it stopped being hovered*/, new Runnable(function() {
+    })).onHover(false/, new Runnable(function() {
         clickableTexture1.setTexture("assets/sprites/Ant-2-1.png");
     }));
 
@@ -145,3 +158,4 @@ Timer.start(350, 0, new Runnable(function() {
     if(Character.getHealth() > 0)
         Character.damage(5);
 }));
+*/

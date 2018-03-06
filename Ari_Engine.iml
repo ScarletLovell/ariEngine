@@ -26,33 +26,66 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx:1.9.6" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-backend-lwjgl:1.9.6" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: net.java.jinput:jinput:2.0.5" level="project" />
-    <orderEntry type="library" name="Maven: net.java.jutils:jutils:1.0.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-linux:2.0.5" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-windows:2.0.5" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-osx:2.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl_util:2.9.2" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.jlayer:jlayer:1.0.1-gdx" level="project" />
-    <orderEntry type="library" name="Maven: org.jcraft:jorbis:0.0.17" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-platform:natives-desktop:1.9.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.badlogicgames.gdx:gdx-platform:natives-armeabi-v7a:1.9.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.badlogicgames.gdx:gdx-backend-gwt:sources:1.9.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.gwt:gwt-user:2.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.jsinterop:jsinterop-annotations:1.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.jsinterop:jsinterop-annotations:sources:1.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.validation:validation-api:1.0.0.GA" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.validation:validation-api:sources:1.0.0.GA" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.w3c.css:sac:1.3" level="project" />
     <orderEntry type="library" name="Maven: com.esotericsoftware.yamlbeans:yamlbeans:1.12" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-assimp:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-bgfx:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-egl:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-glfw:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-jawt:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-jemalloc:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-lmdb:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-lz4:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-nanovg:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-nfd:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-nuklear:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-odbc:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-openal:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-opencl:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-opengl:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-opengles:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-openvr:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-ovr:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-par:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-remotery:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-rpmalloc:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-sse:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-stb:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-tinyexr:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-tinyfd:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-tootle:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-vulkan:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-xxhash:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-yoga:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-zstd:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-assimp:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-bgfx:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-glfw:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-jemalloc:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-lmdb:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-lz4:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-nanovg:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-nfd:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-nuklear:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-openal:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-opengl:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-opengles:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-openvr:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-ovr:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-par:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-remotery:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-rpmalloc:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-sse:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-stb:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-tinyexr:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-tinyfd:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-tootle:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-xxhash:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-yoga:natives-windows:3.1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl:lwjgl-zstd:natives-windows:3.1.6" level="project" />
   </component>
 </module>

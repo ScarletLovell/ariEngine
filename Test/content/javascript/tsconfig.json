@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "checkJs": true,
+        "baseUrl": "./scripts/",
         "target": "es5",
         "module": "none",
         "lib": ["es5"],

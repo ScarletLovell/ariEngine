@@ -1,11 +1,5 @@
 package engine.ari.engine_main.rendering;
 
-import com.badlogic.gdx.graphics.VertexAttributes;
-import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import engine.ari.engine_main.Console;
 import engine.ari.engine_main.modding.javascript.js_engine;
 
@@ -13,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Models {
-    public static ArrayList<ModelInstance> modelInstances = new ArrayList<>();
+    /*public static ArrayList<ModelInstance> modelInstances = new ArrayList<>();
     public static HashMap<ModelInstance, Environment> model_environment = new HashMap<>();
     public ModelCreation createBox() {
         ModelCreation creation = new ModelCreation();
@@ -87,5 +81,5 @@ public class Models {
     public static ModelInstance addCharacterModel(Model model) {
         characterInstance = new ModelInstance(model);
         return characterInstance;
-    }
+    }*/
 }

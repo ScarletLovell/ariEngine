@@ -5,15 +5,13 @@ import engine.ari.engine_main.entity.Character;
 import engine.ari.engine_main.rendering.Screen_Text;
 import engine.ari.engine_main.rendering.Textures;
 import engine.ari.engine_main.rendering.Models;
-import engine.ari.engine_main.rendering.Textures.textureClass;
+//import engine.ari.engine_main.rendering.Textures.textureClass;
 import engine.ari.engine_main.rendering.Screen_Text.screenTextClass;
 import engine.ari.engine_main.modding.javascript.javascript.js_timer;
 import engine.ari.engine_main.Console;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 
 public class Main extends js_engine {
+    /*
     private Character character = new Character();
     private Models models = new Models();
     private Textures textures = new Textures();
@@ -60,7 +58,7 @@ public class Main extends js_engine {
             }
             healthText.setText(character.getHealth() + "%");
             healthBar.setSize(character.getHealth(), 15);
-        });*/
+        });
     }
 
     public void render() {
@@ -68,5 +66,5 @@ public class Main extends js_engine {
         timer.start(25, 0, () -> {
             character.damage(1);
         });
-    }
+    }*/
 }

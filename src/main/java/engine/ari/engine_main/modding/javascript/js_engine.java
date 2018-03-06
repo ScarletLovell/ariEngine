@@ -1,8 +1,10 @@
 package engine.ari.engine_main.modding.javascript;
 
 import engine.ari.engine_main.Engine;
+import jdk.nashorn.internal.objects.NativeJavaImporter;
 import jdk.nashorn.internal.runtime.ScriptFunction;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -24,14 +26,14 @@ public class js_engine extends Engine {
     public Boolean isPaused() {
         return this.getPaused();
     }
-    @Override
+    /*@Override
     public void pause(Boolean pause, Boolean was_already_paused) {
         if(pause == null || was_already_paused == null) {
             getJSConsole().error("Was not paused! Pause(Boolean pause, Boolean was_already_paused)");
             return;
         }
         super.pause(pause, was_already_paused);
-    }
+    }*/
     public class FloatArray extends ArrayList<Float> {
         public Float[] toFloatArray() {
             Float[] floats = new Float[this.size()];
@@ -52,6 +54,7 @@ public class js_engine extends Engine {
     }
     public String getMethodsOfClass(Object cl) {
         Class c;
+
         try {
             c = Class.forName(cl.toString().substring(0, cl.toString().indexOf("@")));
         } catch (ClassNotFoundException e) {

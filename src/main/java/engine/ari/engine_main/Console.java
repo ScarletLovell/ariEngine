@@ -1,15 +1,45 @@
 package engine.ari.engine_main;
 
-import com.badlogic.gdx.Gdx;
 import engine.ari.engine_main.external.External_Console;
 
 import java.awt.*;
-import java.io.Reader;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Console {
     private static External_Console external = new External_Console();
+    public static PrintStream error;
+    public static PrintWriter writer;
+
+    public Console() {
+        if(error == null) {
+            try {
+                error = new PrintStream(new File("console.log")) {
+                    @Override
+                    public void println(String msg) {
+                        Console.log(msg);
+                        super.println(msg);
+                    }
+                };
+            } catch (FileNotFoundException e) {
+                Console.error("err creating PrintStream, this shouldn't happen!");
+            }
+        }
+        if(writer == null) {
+            try {
+                writer = new PrintWriter("console.log", "UTF-8");
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                Console.error("err creating PrintWriter, this shouldn't happen!");
+            }
+        }
+    }
+
+
 
     public static void open_external() {
         external.Initialize();
@@ -86,7 +116,9 @@ public class Console {
         addToStringList(s);
 
         s = prepareStringForLog(stripFontCodes(s));
-        Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
+
+        writer.println(s);
+        //Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
     }
     public static void warn(Object ...objects) {
         String string = "";
@@ -98,7 +130,7 @@ public class Console {
         addToStringList(s);
 
         s = prepareStringForLog(stripFontCodes(s));
-        Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
+        writer.println(s);
     }
     public static void error(Object ...objects) {
         String string = "";
@@ -110,6 +142,6 @@ public class Console {
         addToStringList(s);
 
         s = prepareStringForLog(stripFontCodes(s));
-        Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
+        writer.println(s);
     }
 }

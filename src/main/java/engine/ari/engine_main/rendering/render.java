@@ -1,15 +1,8 @@
 package engine.ari.engine_main.rendering;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import engine.ari.engine_main.entity.Character;
 import engine.ari.engine_main.Console;
 import engine.ari.engine_main.Engine;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -25,6 +18,7 @@ public class render extends Engine {
     //}
 
     private static float[] bg_color = { 0f, 0f, 0f, 0f };
+    /*
     private static SpriteBatch spriteBatch;
     private static ModelBatch modelBatch;
 
@@ -67,7 +61,7 @@ public class render extends Engine {
                 y+=Gdx.graphics.getWidth();break;
         }
         return y;
-    }*/
+    }
 
     private static ArrayList<Integer> modelNumbers = new ArrayList<>();
     private static HashMap<Integer, String> modelStrings = new HashMap<>();
@@ -190,5 +184,5 @@ public class render extends Engine {
         Textures.dispose();
         instances.clear();
         spriteBatch.dispose();
-    }
+    }*/
 }

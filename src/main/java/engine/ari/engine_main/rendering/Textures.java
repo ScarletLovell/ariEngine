@@ -1,15 +1,32 @@
 package engine.ari.engine_main.rendering;
 
+import engine.ari.engine_main.Engine;
 import engine.ari.engine_main.modding.javascript.js_engine;
 import engine.ari.engine_main.Console;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL12;
 
+import javax.imageio.ImageIO;
+
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
+import org.lwjgl.stb.*;
+import static org.lwjgl.opengl.GL11.*;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.*;
 
 public class Textures {
     public static ArrayList<Integer> texture_list = new ArrayList<>();
-    public static HashMap<Integer, Texture> textures = new HashMap<>();
+    public static HashMap<Integer, textureClass> textures = new HashMap<>();
     public static HashMap<Integer, Integer> texture_depth = new HashMap<>();
     public static HashMap<Integer, Boolean> texture_active = new HashMap<>();
     public static HashMap<Integer, Boolean> texture_visible = new HashMap<>();
@@ -17,10 +34,12 @@ public class Textures {
     public static HashMap<Integer, Integer> texture_position_y = new HashMap<>();
     public static HashMap<Integer, Integer> texture_size_w = new HashMap<>();
     public static HashMap<Integer, Integer> texture_size_h = new HashMap<>();
-    public static HashMap<Integer, textureClass> texture_class = new HashMap<>();
+    //public static HashMap<Integer, textureClass> texture_class = new HashMap<>();
 
-    private textureClass getTextureToCursor(int x, int y) {
-        y = (Gdx.graphics.getHeight() - y) * (Gdx.graphics.getHeight() / Gdx.app.getGraphics().getHeight());
+    /*private textureClass getTextureToCursor(int x, int y) {
+        int h = Engine.window.getHeight();
+        int w = Engine.window.getWidth();
+        y = (h - y) * (h / h);
         for(Integer i : texture_list) {
             if(!texture_active.get(i))
                 continue;
@@ -39,9 +58,9 @@ public class Textures {
             }
         }
         return null;
-    }
+    }*/
 
-    public static HashMap<textureClass, Runnable> clickRelease = new HashMap<>();
+    /*public static HashMap<textureClass, Runnable> clickRelease = new HashMap<>();
     public static HashMap<textureClass, Runnable> hoverStop = new HashMap<>();
     public void touchDown () {
         textureClass c;
@@ -98,11 +117,12 @@ public class Textures {
                 clickRelease.clear();
             }
         }
-    }
+    }*/
     public class textureClass extends js_engine {
         private Textures Textures;
         public String texture_location = null;
-        public Texture texture = null;
+        public Integer texture = null;
+        public BufferedImage image;
         public Integer id = null;
         public Boolean visible = null;
 
@@ -115,7 +135,41 @@ public class Textures {
         public Runnable hoverOff = null;
         public Runnable hoverCont = null;
         public Boolean isBeingHovered = false;
+        public Integer makeTexture() {
+            if(this.texture != null) {
+                Console.error("You literally don't need to do this, ever. Please avoid using this. [textureClass.makeTexture()]");
+                return null;
+            }
+            Integer textureID;
 
+            // opengl is fucking confusing
+            int[] pixels = new int[image.getWidth() * image.getHeight()];
+            image.getRGB(0, 0, image.getWidth(), image.getHeight(), pixels, 0, image.getWidth());
+
+            ByteBuffer buffer = BufferUtils.createByteBuffer(image.getWidth() * image.getHeight() * 4);
+            buffer.order(ByteOrder.nativeOrder());
+            for(int y = 0; y < image.getHeight(); y++)
+            {
+                for(int x = 0; x < image.getWidth(); x++)
+                {
+                    int pixel = pixels[y * image.getWidth() + x];
+                    buffer.put((byte) ((pixel >> 16) & 0xFF));     // Red component
+                    buffer.put((byte) ((pixel >> 8) & 0xFF));      // Green component
+                    buffer.put((byte) (pixel & 0xFF));               // Blue component
+                    buffer.put((byte) ((pixel >> 24) & 0xFF));    // Alpha component. Only for RGBA
+                }
+            }
+            buffer.flip();
+
+            textureID = glGenTextures();
+            glBindTexture(GL11.GL_TEXTURE_2D, textureID);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+            return textureID;
+        }
         public textureClass onClick(Boolean released, Runnable runnable) {
             if(released != null) {
                 if (!released) clickOff = runnable;
@@ -138,7 +192,7 @@ public class Textures {
             return this;
         }
         public textureClass setTexture(String location) {
-            if(!Gdx.files.internal(location).exists()) {
+            /*if(!Gdx.files.internal(location).exists()) {
                 Console.error("Attempted to create texture, but it's file doesn't exist:", location);
                 return this;
             }
@@ -146,10 +200,10 @@ public class Textures {
             texture_location = location;
             Texture newTexture = this.texture = new Texture(location);
             textures.put(id, newTexture);
-            old.dispose();
+            old.dispose();*/
             return this;
         }
-        public Texture getTexture() {
+        public Integer getTexture() {
             return texture;
         }
         public textureClass setPosition(Integer x, Integer y) {
@@ -168,6 +222,9 @@ public class Textures {
             }
             texture_depth.put(id, depth);
             return this;
+        }
+        public int getDepth() {
+            return texture_depth.get(id);
         }
         public textureClass setVisible(Boolean b) {
             this.visible = b;
@@ -209,7 +266,8 @@ public class Textures {
             if(texture_size_h.containsKey(this.id))
                 texture_size_h.put(id, texture_size_h.get(this.id));
             textureClass t;
-            if(objects[1] instanceof String && Gdx.files.internal((String)objects[1]).exists())
+            File file = new File((String)objects[1]);
+            if(objects[1] instanceof String && file.exists())
                 t = addTexture((Integer)objects[0], (String)objects[1]);
             else
                 t = Textures.addTexture((Integer)objects[0], texture_location);
@@ -228,8 +286,7 @@ public class Textures {
             texture_list.remove(id);
             texture_size_h.remove(id);
             texture_size_w.remove(id);
-            texture_class.remove(id);
-            this.texture.dispose();
+            //this.texture.dispose();
             this.texture_location = null;
             this.id = null;
         }
@@ -240,13 +297,14 @@ public class Textures {
     }
     public String getList() {
         String s = "\n";
-        for(Map.Entry<Integer, Texture> entry : textures.entrySet()) {
-            Texture texture = entry.getValue();
-            s = s + "Id " + entry.getKey() + (texture == null ? ": NULL" : ": " + "W"+texture.getWidth() + ", H"+texture.getHeight() + ", FORMAT "+texture.getTextureData().getFormat()) + "\n";
+        for(Map.Entry<Integer, textureClass> entry : textures.entrySet()) {
+            textureClass textureClass = entry.getValue();
+            Integer texture = textureClass.id;
+            s = s + "Id " + entry.getKey() + (texture == null ? ": NULL" : texture);//: " + "W"+texture.getWidth() + ", H"+texture.getHeight() + ", FORMAT "+texture.getTextureData().getFormat()) + "\n";
         }
         return s;
     }
-    public textureClass addTexture(Integer texture_id) {
+    /*public textureClass addTexture(Integer texture_id) {
         if(!textures.containsKey(texture_id)) {
             Console.log("Created a new null texture with the id: " + texture_id);
             textures.put(texture_id, null);
@@ -261,46 +319,70 @@ public class Textures {
         texture_list.add(texture_id);
         texture_class.put(texture_id, textureClass);
         return textureClass.get();
-    }
+    }*/
     public textureClass addTexture(Integer texture_id, String location) {
-        Texture texture;
+        BufferedImage image;
+        textureClass textureClass;
         if(!textures.containsKey(texture_id)) {
-            if(!Gdx.files.internal(location).exists()) {
-                Console.error("Attempted to create texture, but it's file doesn't exist:", location);
+            File file = new File(location);
+            if(!file.exists()) {
+                ClassLoader classLoader = getClass().getClassLoader();
+                try {
+                    file = new File(classLoader.getResource(location).getFile());
+                } catch(NullPointerException e) {
+                    Console.error(e.fillInStackTrace());
+                    return null;
+                }
+                if(!file.exists()) {
+                    Console.error("Attempted to create a new texture, but its file doesn't exist... ["+texture_id+"]");
+                    return null;
+                }
+            }
+            try {
+                image = ImageIO.read(file);
+            } catch (IOException e) {
+                Console.error("error");
+                Console.error(e.fillInStackTrace());
                 return null;
             }
-            texture = new Texture(location);
-            textures.put(texture_id, texture);
-            Console.log("Created a new texture with the id: " + texture_id);
+            textureClass = new textureClass();
+            Console.log(
+                    "Created a new texture:" +
+                    "\n    id: " + texture_id +
+                    "\n    loc: " + location +
+                    "\n"
+            );
         } else {
-            Console.warn("Cannot put texture_id of " + texture_id + " when it already exists");
+            Console.warn("Cannot create new texture of id "+texture_id+" when it already exists");
             return null;
         }
-        textureClass textureClass = new textureClass();
         textureClass.texture_location = location;
-        textureClass.texture = texture;
+        textureClass.image = image;
         textureClass.id = texture_id;
+        textureClass.setDepth(0);
+        textureClass.setActive(true);
+        textureClass.setPosition(0, 0);
         texture_list.add(texture_id);
-        texture_class.put(texture_id, textureClass);
+        textures.put(texture_id, textureClass);
         return textureClass.get();
     }
     public textureClass get(Integer texture_id) {
-        return texture_class.get(texture_id);
+        return textures.get(texture_id);
     }
     public void removeTexture(Integer texture_id) {
         if(!textures.containsKey(texture_id))
             return;
         texture_list.remove(texture_id);
-        textures.get(texture_id).dispose();
+        //textures.get(texture_id).dispose();
         texture_active.remove(texture_id);
     }
     public void delete(Integer texture_id) {
         removeTexture(texture_id);
     }
-    public Texture getTexture(Integer id) {
+    /*public Texture getTexture(Integer id) {
         return textures.getOrDefault(id, null);
-    }
-    protected static void dispose() {
+    }*/
+    /*protected static void dispose() {
         Console.warn("Getting rid of all textures...");
         for(Integer texture_id : texture_list) {
             if(textures.get(texture_id) != null) {
@@ -309,5 +391,5 @@ public class Textures {
                 textures.remove(texture_id);
             }
         }
-    }
+    }*/
 }

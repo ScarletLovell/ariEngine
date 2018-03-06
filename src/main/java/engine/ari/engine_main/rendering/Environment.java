@@ -1,10 +1,7 @@
 package engine.ari.engine_main.rendering;
 
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-
 public class Environment {
-    private static com.badlogic.gdx.graphics.g3d.Environment env = new com.badlogic.gdx.graphics.g3d.Environment();
+    /*private static com.badlogic.gdx.graphics.g3d.Environment env = new com.badlogic.gdx.graphics.g3d.Environment();
     private static DirectionalLight light = new DirectionalLight();
     public static void makeNewEnvironment(float[] rgba, float[] dirRGB, float[] dir) {
         env.set(new ColorAttribute(ColorAttribute.AmbientLight, rgba[0], rgba[1], rgba[2], rgba[3]));
@@ -16,5 +13,5 @@ public class Environment {
     }
     public static com.badlogic.gdx.graphics.g3d.Environment get() {
         return env;
-    }
+    }*/
 }

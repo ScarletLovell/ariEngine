@@ -1,17 +1,30 @@
 package engine.ari;
 // Fun fact: Ari means Ant in Japanese
 
-import com.badlogic.gdx.Files;
+import org.lwjgl.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
+
+import java.nio.*;
+
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
+
+/*import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;*/
 import engine.ari.engine_main.Console;
 
 import java.util.Locale;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		/*LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 800;
 		config.height = 600;
 		config.fullscreen = false;
@@ -26,6 +39,17 @@ public class DesktopLauncher {
 			Console.error("Not sure what OS you're running on!! Canceling!");
 			return;
 		}
-		new LwjglApplication(new main(), config);
+		new LwjglApplication(new main(), config);*/
+
+		// RIP LibGDX
+		main main = new main();
+		main.create();
+		main.render();
+
+		glfwFreeCallbacks(main.window);
+		glfwDestroyWindow(main.window);
+
+		glfwTerminate();
+		glfwSetErrorCallback(null).free();
 	}
 }

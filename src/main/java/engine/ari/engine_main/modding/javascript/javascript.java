@@ -5,15 +5,13 @@ import engine.ari.engine_main.map.Map;
 import engine.ari.engine_main.rendering.*;
 import engine.ari.engine_main.entity.Character;
 import engine.ari.engine_main.entity.Entity;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 
 import javax.script.*;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Timer;
+import java.util.function.Consumer;
 
 public class javascript extends Engine {
     private engine.ari.engine_main.modding.javascript.js_engine js_engine;
@@ -41,14 +39,14 @@ public class javascript extends Engine {
     public ScriptEngine getEngine() {
         return engine;
     }
-    public Texture texture(String texture) {
+    /*public Texture texture(String texture) { // I didn't get the point of why I made this anyway
         try {
             return new Texture(texture);
         } catch(Exception e) {
             js_console.error(e.toString() + ": " + e.getMessage());
         }
         return null;
-    }
+    }*/
     public Object eval(String eval, String file, Boolean execMain) {
         if(file == null) {
             js_console.warn("TS file is null? This isn't suppose to happen...");
@@ -79,9 +77,15 @@ public class javascript extends Engine {
         return null;
     }
 
-    public static Boolean require(String file) {
+    private static Boolean require(String file) {
 
         return false;
+    }
+
+    public static class Script {
+        public Script(Object a) {
+            Console.warn(a);
+        }
     }
 
     public static class js_timer extends Engine {
@@ -122,7 +126,7 @@ public class javascript extends Engine {
             String s = "   ["+time+ " " +js_engine.getTitle()+", LOG]: " + string;
             System.out.println(s);
             Console.addToStringList(s);
-            Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
+            //Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
         }
         public void warn(Object ...objects) {
             String string = "";
@@ -134,7 +138,7 @@ public class javascript extends Engine {
             String s = Console.getFontCode("YELLOW")+"   ["+time+ " " +js_engine.getTitle()+", WARN]"+ Console.getFontCode("RESET")+": " + string;
             System.out.println(s);
             Console.addToStringList(s);
-            Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
+            //Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
         }
         public void error(Object ...objects) {
             String string = "";
@@ -146,7 +150,7 @@ public class javascript extends Engine {
             String s = Console.getFontCode("RED")+"   ["+time+ " " +js_engine.getTitle()+", ERROR]: " + string + Console.getFontCode("RESET");
             System.out.println(s);
             Console.addToStringList(s);
-            Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
+            //Gdx.files.local("./console.txt").writeString(s + "\r\n", true);
         }
     }
 
@@ -160,6 +164,18 @@ public class javascript extends Engine {
         }
     }
 
+    public class exports {
+        public java.util.ArrayList<Object> exports = new java.util.ArrayList<>();
+        public void add() {
+
+        }
+        public Object get(Object obj) {
+            if(exports.contains(obj)) {
+
+            }
+            return null;
+        }
+    }
     public void setBindings() {
         ArrayList arrayList = new ArrayList();
         Networking networking = new Networking();
@@ -170,14 +186,16 @@ public class javascript extends Engine {
         Entity entity = new Entity();
         Models models = new Models();
         Environment environment = new Environment();
-        DirectionalLight directionalLight = new DirectionalLight();
+        //Script script = javascript::Script;
+        //DirectionalLight directionalLight = new DirectionalLight();
         Bindings bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.remove("print");
+        //bindings.put("Script", script);
         bindings.put("Dialog", new Dialog());
         bindings.put("Sound", new Sound());
         bindings.put("Networking", networking);
         bindings.put("Character", character);
-        bindings.put("Camera", character.camera);
+        //bindings.put("Camera", character.camera);
         bindings.put("Render", render);
         bindings.put("Textures", textures);
         bindings.put("Engine", js_engine);
@@ -190,7 +208,8 @@ public class javascript extends Engine {
         bindings.put("Entity", entity);
         bindings.put("Model", models);
         bindings.put("Environment", environment);
-        bindings.put("DirectionalLight", directionalLight);
+        //bindings.put("DirectionalLight", directionalLight);
+        bindings.put("require", (Consumer<String>)javascript::require);
         bindings.put("ArrayList", arrayList);
         engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
     }

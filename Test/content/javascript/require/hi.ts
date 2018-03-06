@@ -1,3 +1,7 @@
+
+
 function main_hi() {
-    Console.log(model);
+    Console.log("hi");
 }
+
+exports.hi = main_hi;

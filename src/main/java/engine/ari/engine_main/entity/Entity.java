@@ -1,16 +1,9 @@
 package engine.ari.engine_main.entity;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import engine.ari.engine_main.Console;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.ModelLoader;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
-import com.badlogic.gdx.math.Vector3;
+
 public class Entity {
+    /*
     public static ModelLoader modelLoader = new ObjLoader();
     public class EntityObject{
         public ModelInstance modelInstance;
